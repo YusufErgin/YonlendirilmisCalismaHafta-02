@@ -29,7 +29,7 @@
 							<form name="form4" method="post" action="">
 							  <table width="294" height="132" border="0" align="center">
 							    <tr>
-							      <td width="91" height="37">Cinsi Ara</td>
+							      <td width="91" height="37">Tür Ara</td>
 							      <td width="174"><input type="text" name="ara" id="ara"></td>
 						        </tr>
 							    <tr>
@@ -42,7 +42,7 @@
 <?php
  if(isset($_POST["arama"])){ extract($_POST);
 $baglan=mysqli_connect("localhost","root","","yuva");
-$sonuc=mysqli_query($baglan,"select * from ilan where Cinsi like '%$ara'"); 
+$sonuc=mysqli_query($baglan,"select * from ilan where Turu like '%$ara'"); 
 
 $satirr=mysqli_num_rows($sonuc);
 mysqli_set_charset($baglan, "utf8");
@@ -54,10 +54,12 @@ echo "<table class='yazilar' align='center' width='50%' border='0' cellspacing='
 while($satir=mysqli_fetch_array($sonuc))
 {
 if($sutun==2){ $sutun=0; echo '</tr><tr>'; }
-    echo '<td>
+        echo '<td>
 	<a><img src="'.$satir['ResimYolu'].'.jpg" width="250" height="250" border="0" /></a><br>Adı:
-	'.$satir['Adi'].' <br>Cinsi:
+	'.$satir['Adi'].' <br>Türü:
 	'.$satir['Cinsi'].' 
+        <br>Cinsi :
+        '.$satir['Turu'].'
 <br>Yaşı:
 	'.$satir['Yas'].'
 </td>';

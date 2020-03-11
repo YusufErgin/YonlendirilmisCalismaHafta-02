@@ -43,8 +43,10 @@ while($satir=mysqli_fetch_array($sonuc))
 if($sutun==2){ $sutun=0; echo '</tr><tr>'; }
     echo '<td>
 	<a><img src="'.$satir['ResimYolu'].'.jpg" width="250" height="250" border="0" /></a><br>Adı:
-	'.$satir['Adi'].' <br>Cinsi:
+	'.$satir['Adi'].' <br>Türü:
 	'.$satir['Cinsi'].' 
+        <br>Cinsi :
+        '.$satir['Turu'].'
 <br>Yaşı:
 	'.$satir['Yas'].'
 </td>';

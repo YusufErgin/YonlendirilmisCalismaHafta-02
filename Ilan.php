@@ -38,9 +38,26 @@
 <td><input type="text" name="ad"></td>
 </tr>
 <tr>
-<td>Cinsi</td>
-<td><input type="text" name="cinsi"></td>
+<td>Türü</td>
+<td><label for="select"></label>
+        <select name="select" id="select">
+        <?php
+         $baglan=mysqli_connect("localhost","root","","yuva"); 
+         mysqli_set_charset($baglan, "utf8");
+         $sorgu=mysqli_query($baglan,"Select * from turler");
+         while($Turi=mysqli_fetch_array($sorgu))
+         {
+         echo "<option>".$Turi["Tur"]."</option>";
+
+         }
+         ?>   
+         </select></td>
 </tr>
+
+<td>Cinsi</td>
+<td><input type="text" name="cins"></td>
+</tr>
+
 <tr>
 <td>Yaşı</td>
 <td><input type="text" name="yas"></td>
@@ -67,7 +84,7 @@
 $baglan=mysqli_connect("localhost","root","","yuva"); 
 mysqli_set_charset($baglan, "utf8");
  
-if(empty($Kad) || empty($ad)|| empty($cinsi)|| empty($yas)|| empty($AsiBilgisi)|| empty($dosya)){
+if(empty($Kad) || empty($ad)|| empty($select)|| empty($yas)|| empty($AsiBilgisi)|| empty($dosya) || empty ($cins)){
 				echo "Lütfen Boş Alan Bırakmayın";
 				}
 else{
@@ -80,8 +97,8 @@ else{
 		
 			
 		
-$sqlekle="INSERT INTO ilan(Kad,Adi,Cinsi,Yas,AsiBilgisi,ResimYolu,YorumNo,KullaniciNo,Onay) 
-VALUES ('$Kad','$ad','$cinsi','$yas','$AsiBilgisi','$resim','1','1','0')";
+$sqlekle="INSERT INTO ilan(Kad,Adi,Cinsi,Yas,AsiBilgisi,ResimYolu,YorumNo,KullaniciNo,Onay,Turu) 
+VALUES ('$Kad','$ad','$select','$yas','$AsiBilgisi','$resim','1','1','0','$cins')";
 $sonuc=mysqli_query($baglan,$sqlekle);
 if($sonuc==1){echo "Kayıt basarılı ";
  $_SESSION["kullanici"]=$sonuc["Kad"];
