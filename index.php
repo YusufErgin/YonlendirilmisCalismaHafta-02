@@ -16,7 +16,7 @@
     <ul class="navigation fright">
 
      	
- <a href="index.php" title="Anasayfa">Anasayfa</a>
+      <a href="index.php" title="Anasayfa">Anasayfa</a>
 
     
 
@@ -57,6 +57,8 @@ if($sutun==2){ $sutun=0; echo '</tr><tr>'; }
         '.$satir['Turu'].'
 <br>Yaşı:
 	'.$satir['Yas'].'
+<br>İlan Sahibi:
+	'.$satir['Kad'].'
 </td>';
     $sutun++;
 }

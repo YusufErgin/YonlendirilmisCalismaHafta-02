@@ -18,6 +18,7 @@
 
       <a href="yuva.php" title="Bize Ulaşın">Yuva-Bulanlar</a>
       <a href="Arama.php" title="Bize Ulaşın">Arama Yap</a>
+ <a href="Mesaj.php" title="Bize Ulaşın">Mesajlarım</a>
     </ul>
 
   </nav>

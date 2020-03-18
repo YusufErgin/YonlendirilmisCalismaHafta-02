@@ -17,6 +17,7 @@
 
       <a href="yuva.php" title="Bize Ulaşın">Yuva-Bulanlar</a>
 <a href="Arama.php" title="Bize Ulaşın">Arama Yap</a>
+ <a href="Mesaj.php" title="Bize Ulaşın">Mesajlarım</a>
 
     </ul>
 
@@ -42,7 +43,7 @@
 <?php
  if(isset($_POST["arama"])){ extract($_POST);
 $baglan=mysqli_connect("localhost","root","","yuva");
-$sonuc=mysqli_query($baglan,"select * from ilan where Turu like '%$ara'"); 
+$sonuc=mysqli_query($baglan,"select * from ilan where Cinsi like '%$ara'"); 
 
 $satirr=mysqli_num_rows($sonuc);
 mysqli_set_charset($baglan, "utf8");

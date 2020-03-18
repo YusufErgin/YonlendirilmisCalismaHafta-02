@@ -17,7 +17,7 @@
 
       <a href="yuva.php" title="Bize Ulaşın">Yuva-Bulanlar</a>
      <a href="Arama.php" title="Bize Ulaşın">Arama Yap</a>
-
+ <a href="Mesaj.php" title="Bize Ulaşın">Mesajlarım</a>
     </ul>
 
   </nav>
@@ -48,6 +48,8 @@ if($sutun==2){ $sutun=0; echo '</tr><tr>'; }
         '.$satir['Turu'].'
 <br>Yaşı:
 	'.$satir['Yas'].'
+<br>İlan Sahibi:
+	'.$satir['Kad'].'
 </td>';
     $sutun++;
 }
