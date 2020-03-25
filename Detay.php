@@ -27,37 +27,50 @@
 
 </header>
 
-     <div align="center">İlanlar</div></p>
+     <div align="center">İlan Detay</div></p>
 
 <?php
 $baglan=mysqli_connect("localhost","root","","yuva");
-$sonuc=mysqli_query($baglan,"select * from ilan where Durum='0' and Onay='1'"); 
-
+$sonuc=mysqli_query($baglan,"select * from ilan"); 
 $satirr=mysqli_num_rows($sonuc);
 mysqli_set_charset($baglan, "utf8");
-if($satirr<=0) { echo "<h>  </h>"; return; }
-$sutun=0;
+
+	if(isset($_GET["islem"]))
+	{
+		$islem=$_GET["islem"];
+		
+		switch ($islem)
+		{
+
+                        case "sil":  
+                        $id=$_GET['llanId'];
+                        $baglan=mysqli_connect("localhost","root","","yuva");
+$sonuc=mysqli_query($baglan,"select * from ilan where llanId='$id'"); 
+$satirr=mysqli_num_rows($sonuc);
+mysqli_set_charset($baglan, "utf8");
 echo "<h2 align='center'></h2>";
 echo "<table class='yazilar' align='center' width='50%' border='0' cellspacing='0' cellpadding='0'><tr>
 <td colspan=''> </td></tr>";
-while($satir=mysqli_fetch_array($sonuc))
+$satir=mysqli_fetch_array($sonuc);
 {
-if($sutun==2){ $sutun=0; echo '</tr><tr>'; }
     echo '<td>
-	  <a><img src="'.$satir['ResimYolu'].'.jpg" width="250" height="250" border="0" /></a><br>İlan Numarası:
-	'.$satir['llanId'].'<br>Adı:
+	  <a><img src="'.$satir['ResimYolu'].'.jpg" width="250" height="250" border="0" /></a><br>Adı:
 	'.$satir['Adi'].' <br>Türü:
 	'.$satir['Cinsi'].' 
         <br>Cinsi :
         '.$satir['Turu'].'
 <br>Yaşı:
 	'.$satir['Yas'].'
-<br>'."<a href='Detay.php?islem=sil&llanId=".$satir['llanId']."'>İlana Git</a>".'
+<br>İlan Sahibi:
+	'.$satir['Kad'].'
 	
 </td>';
-    $sutun++;
 }
 echo '</tr></table>';
+			break;
+		}
+}
+
 ?>
  
 

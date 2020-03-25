@@ -22,7 +22,7 @@
 						      </table>
 						  </form>
 
-    <form name="form4" method="post" action="">
+                                           <form name="form4" method="post" action="">
 							  <table width="294" height="132" border="0" align="center">
 							    <tr>
 							      <td>Kullanıcıları Listele</td>
@@ -33,8 +33,46 @@
 						  </form>
 
 
+                                              <form name="form4" method="post" action="">
+							  <table width="294" height="132" border="0" align="center">
+							    <tr>
+							      <td>Mesajlarımı Göster</td>
+							      <td colspan="2" align="center"><input type="submit" name="liste3" id="liste3" value="Listele"></td>
+						           </tr>
+						
+						      </table>
+						  </form>
 
- 
+
+<?php
+ if(isset($_POST["liste3"])){ extract($_POST);
+$baglan=mysqli_connect("localhost","root","","yuva");
+$sonuc=mysqli_query($baglan,"select * from mesajlar where AliciK like 'Admin'"); 
+
+$satirr=mysqli_num_rows($sonuc);
+mysqli_set_charset($baglan, "utf8");
+if($satirr<=0) { echo "<h>  </h>"; return; }
+$sutun=0;
+echo "<h2 align='center'></h2>";
+echo "<table class='yazilar' align='center' width='50%' border='0' cellspacing='0' cellpadding='0'><tr>
+<td colspan=''> </td></tr>";
+while($satir=mysqli_fetch_array($sonuc))
+{
+if($sutun==1){ $sutun=0; echo '</tr><tr>'; }
+        echo '<td>
+	Gönderen Kullanıcı:
+	'.$satir['GonderenK'].' <br>Mesajınız :
+	'.$satir['Mesaj'].' 
+       
+</td>';
+    $sutun++;
+}
+echo '</tr></table>';
+}
+?>
+
+
+
     <?php
  if(isset($_POST["liste"])){ extract($_POST);
 $baglan=mysqli_connect("localhost","root","","yuva");
@@ -51,13 +89,16 @@ while($satir=mysqli_fetch_array($sonuc))
 {
 if($sutun==2){ $sutun=0; echo '</tr><tr>'; }
     echo '<td>
-	<a><img src="'.$satir['ResimYolu'].'.jpg" width="250" height="250" border="0" /></a><br>Adı:
+	<a><img src="'.$satir['ResimYolu'].'.jpg" width="250" height="250" border="0" /></a><br>İlan Numarası:
+	'.$satir['llanId'].'
+<br>Adı:
 	'.$satir['Adi'].' <br>Cinsi:
 	'.$satir['Cinsi'].' 
 <br>Onay Durumu:
 	'.$satir['Onay'].'
 '."<a href='adminGiris.php?islem=sil&llanId=".$satir['llanId']."'>Onayla</a>".'
 '."<a href='adminGiris.php?islem2=sil&llanId=".$satir['llanId']."'>İlanı Sil</a>".'
+'."<a href='adminGiris.php?islem3=sil&llanId=".$satir['llanId']."'>Yuva-Bulanlara Taşı</a>".'
 </td>';
     $sutun++;
 }
@@ -101,6 +142,26 @@ if(isset($_GET["islem2"]))
 			
 		}
 }
+
+if(isset($_GET["islem3"]))
+	{
+		$islem3=$_GET["islem3"];
+		
+		switch ($islem3)
+		{
+			
+			case "sil":
+			 $id=$_GET['llanId'];
+			 $sonuc=mysqli_query($baglan,"UPDATE ilan SET Durum ='1' WHERE ilan.llanId='$id'");
+			echo "Yorum Onaylandı";
+			header("location:adminGiris.php");
+			break;
+			
+			
+			
+		}
+}
+
 
 }
 ?>
