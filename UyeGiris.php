@@ -51,6 +51,7 @@
 </form>
 
 <?php
+session_start();
 if(isset($_POST["uye"])){ extract($_POST);
 $baglan=mysqli_connect("localhost","root","","yuva"); 
 mysqli_set_charset($baglan, "utf8");

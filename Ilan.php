@@ -18,7 +18,7 @@
 
       <a href="yuva.php" title="Bize Ulaşın">Yuva-Bulanlar</a>
       <a href="Arama.php" title="Bize Ulaşın">Arama Yap</a>
- <a href="Mesaj.php" title="Bize Ulaşın">Mesajlarım</a>
+ <a href="Mesaj.php" title="Bize Ulaşın">Profilim</a>
     </ul>
 
   </nav>
@@ -32,7 +32,19 @@
  
 </tr>
 <td>Kullanıcı Adı</td>
-<td><input type="text" name="Kad"></td>
+<td><label for="select2"></label>
+        <select name="select2" id="select2">
+        <?php
+ 
+session_start();
+ob_start();
+ 
+echo "<option>".$_SESSION["kullanici"]."</option>";
+         
+         
+         ?>   
+         </select></td>
+</tr>
 </tr>
 <tr>
 <td>Adi</td>
@@ -81,11 +93,12 @@
 
 <?php
 
+
  if(isset($_POST["uye"])){ extract($_POST);
 $baglan=mysqli_connect("localhost","root","","yuva"); 
 mysqli_set_charset($baglan, "utf8");
  
-if(empty($Kad) || empty($ad)|| empty($select)|| empty($yas)|| empty($AsiBilgisi)|| empty($dosya) || empty ($cins)){
+if(empty($select2) || empty($ad)|| empty($select)|| empty($yas)|| empty($AsiBilgisi)|| empty($dosya) || empty ($cins)){
 				echo "Lütfen Boş Alan Bırakmayın";
 				}
 else{
@@ -99,10 +112,10 @@ else{
 			
 		
 $sqlekle="INSERT INTO ilan(Kad,Adi,Cinsi,Yas,AsiBilgisi,ResimYolu,YorumNo,KullaniciNo,Onay,Turu) 
-VALUES ('$Kad','$ad','$select','$yas','$AsiBilgisi','$resim','1','1','0','$cins')";
+VALUES ('$select2','$ad','$select','$yas','$AsiBilgisi','$resim','1','1','0','$cins')";
 $sonuc=mysqli_query($baglan,$sqlekle);
 if($sonuc==1){echo "Kayıt basarılı ";
- $_SESSION["kullanici"]=$sonuc["Kad"];
+ //$_SESSION["kullanici"]=$sonuc["Kad"];
  header("location:anasayfa.php");
 
 }

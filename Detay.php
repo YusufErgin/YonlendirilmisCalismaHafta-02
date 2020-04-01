@@ -19,7 +19,7 @@
 
       <a href="yuva.php" title="Bize Ulaşın">Yuva-Bulanlar</a>
       <a href="Arama.php" title="Bize Ulaşın">Arama Yap</a>
-      <a href="Mesaj.php" title="Bize Ulaşın">Mesajlarım</a>
+      <a href="Mesaj.php" title="Bize Ulaşın">Profilim</a>
 
     </ul>
 
@@ -63,13 +63,21 @@ $satir=mysqli_fetch_array($sonuc);
 	'.$satir['Yas'].'
 <br>İlan Sahibi:
 	'.$satir['Kad'].'
+<br>'."<a href='sahiplen.php?islem2=sil&llanId=".$satir['llanId']."'>Sahiplen</a>".'
 	
 </td>';
 }
 echo '</tr></table>';
 			break;
 		}
+
+ 
 }
+
+        
+
+
+
 
 ?>
  

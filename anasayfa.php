@@ -12,14 +12,10 @@
     <ul class="navigation fright">
 
       <a href="anasayfa.php" title="Anasayfa">Anasayfa</a>
-
-    
-
       <a href="Ilan.php" title="İlanlar">İlan Ver</a>
-
       <a href="yuva.php" title="Bize Ulaşın">Yuva-Bulanlar</a>
       <a href="Arama.php" title="Bize Ulaşın">Arama Yap</a>
-      <a href="Mesaj.php" title="Bize Ulaşın">Mesajlarım</a>
+      <a href="Mesaj.php" title="Bize Ulaşın">Profilim</a>
 
     </ul>
 
@@ -30,8 +26,12 @@
      <div align="center">İlanlar</div></p>
 
 <?php
+session_start();
+ob_start();
+ 
+$ad=$_SESSION["kullanici"];
 $baglan=mysqli_connect("localhost","root","","yuva");
-$sonuc=mysqli_query($baglan,"select * from ilan where Durum='0' and Onay='1'"); 
+$sonuc=mysqli_query($baglan,"select * from ilan where Durum='0' and Onay='1' and Kad  not like '$ad'"); 
 
 $satirr=mysqli_num_rows($sonuc);
 mysqli_set_charset($baglan, "utf8");
@@ -64,6 +64,7 @@ echo '</tr></table>';
  <?php
 						 if(isset($_SESSION["kullanici"]))
                 {
+       
                    echo "<a href='cikis.php'>ÇIKIŞ </a>";
                     echo "</p>";
 
