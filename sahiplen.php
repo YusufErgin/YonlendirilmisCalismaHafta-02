@@ -64,26 +64,24 @@ echo '</tr></table>';
  </form>
                                                          
                                                           <form name="form5" method="post" action="">
-							  <table width="100" height="100" border="0" align="center">
+							  <table width="350" height="0" border="0" align="center">
 							    <tr>
-							      <td width="100" height="100">Kullanıcı Adınız </td>
-							      <td><label for="select2"></label>
-<label for="select2"></label>
-        <select name="select2" id="select2">
+							      <td width="200" height="0">Kullanıcı Adınız : </td>
+							      
+<td width="100" height="10">
         <?php
  
 session_start();
 ob_start();
- 
-echo "<option>".$_SESSION["kullanici"]."</option>";
-         
-         
+ $select2=$_SESSION["kullanici"];
+echo $_SESSION["kullanici"];    
          ?>   
-         </select></td>
+         </td>
 						           </tr>
 							    <tr>
-							      <td width="100" height="100">İlan Sahibini Seçin </td>
-							      <td width="100"><label for="select"></label>
+							      <td width="100" height="10">İlan Sahibi </td>
+							      <td width="100">
+        
         <select name="Kad" id="Kad">
         <?php
          $id=$_GET['llanId'];
@@ -93,36 +91,58 @@ echo "<option>".$_SESSION["kullanici"]."</option>";
          while($Kad=mysqli_fetch_array($sorgu))
          {
          echo "<option>".$Kad["Kad"]."</option>";
-
+        
          }
+
          ?>   
-         </select></td>
+     </select> </td>
 
 
 						           </tr>
 
 
 <tr>
-							      <td width="100" height="100">İlan No </td>
-							      <td width="100"><label for="select"></label>
-        <select name="ilanNo" id="ilanNo">
-        <?php
+							      <td width="100" height="10">İlan No </td>
+							      <td width="100">
         
-         echo "<option>".$id=$_GET['llanId']."</option>";
-
-         
+        <?php
+         $id=$_GET['llanId'];
+         echo $id=$_GET['llanId'];
          ?>   
-         </select></td>
+        </td>
 
 
-						           </tr>
+			
+			           </tr>
+                          <tr>
+                       <td>Daha Önce Evcil Hayvan Besledim</td>
+                         </tr> 
+                         <td> <input type="radio" name="soru" value="Evet" />Evet</td>
+                         <td> <input type="radio" name="soru" value="Hayir" />Hayır</td>
+                              
+                         <?php
+ if(empty($_GET['soru'])){
+   //echo "lütfen bir alan seçiniz";
+   }
+  else if(isset($_GET['soru'])){
+   $soru = $_GET['ders'];
+   echo $soru;
+}
+?>
 
-
-
+                            
                                                             <tr>
-							      <td width="100" height="100">Telefon Numaranızı Girin</td>
+							      <td width="100" height="10">Kendinizi Tanıtın </td>
 							       <td><textarea name="yorum" id="yorum"></textarea></td>
 						           </tr>
+
+
+
+
+
+</tr>
+
+
 
 							     <td colspan="2" align="center"><input type="submit" name="Sahiplen" id="Sahiplen" value="Sahiplen"></td> 
 						        
@@ -134,14 +154,14 @@ echo "<option>".$_SESSION["kullanici"]."</option>";
 $baglan=mysqli_connect("localhost","root","","yuva"); 
 mysqli_set_charset($baglan, "utf8");
  
-if(empty($Kad) || empty($select2)|| empty($yorum)){
+if(empty($yorum)){
 				echo "Lütfen Boş Alan Bırakmayın";
 				}
 else{
    
 	
-$sqlekle="INSERT INTO mesajlar(Mesaj,GonderenK,AliciK,Mesaj2,ilanNo) 
-VALUES ('$yorum','$select2','$Kad','Sahiplenmek istiyorum','$ilanNo')";
+$sqlekle="INSERT INTO mesajlar(Mesaj,GonderenK,AliciK,Mesaj2,ilanNo,onay,soru) 
+VALUES ('$yorum','$select2','$Kad','Sahiplenmek istiyorum','$id','0','$soru')";
 $sonuc=mysqli_query($baglan,$sqlekle);
 if($sonuc==1){echo "Kayıt basarılı ";
  //$_SESSION["kullanici"]=$sonuc["Kad"];

@@ -42,9 +42,10 @@ mysqli_set_charset($baglan, "utf8");
 		switch ($islem)
 		{
 
-                        case "sil":  
+                       case "sil":  
                         $id=$_GET['llanId'];
                         $baglan=mysqli_connect("localhost","root","","yuva");
+$sonuc2=mysqli_query($baglan,"UPDATE ilan SET hit =hit+1 WHERE ilan.llanId='$id'"); 
 $sonuc=mysqli_query($baglan,"select * from ilan where llanId='$id'"); 
 $satirr=mysqli_num_rows($sonuc);
 mysqli_set_charset($baglan, "utf8");

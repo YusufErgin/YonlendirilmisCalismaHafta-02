@@ -28,11 +28,10 @@
 <?php
 session_start();
 ob_start();
-
+ 
 $ad=$_SESSION["kullanici"];
-//$add=$_SESSION["kullaniciId"];
 $baglan=mysqli_connect("localhost","root","","yuva");
-$sonuc=mysqli_query($baglan,"select * from ilan where Durum='0' and Onay='1' and Kad  not like '$ad'  order by llanId asc limit 0,3"); 
+$sonuc=mysqli_query($baglan,"select * from ilan where Durum='0' and Onay='1' and Kad  not like '$ad' order by llanId asc limit 3,3"); 
 
 $satirr=mysqli_num_rows($sonuc);
 mysqli_set_charset($baglan, "utf8");
@@ -60,10 +59,9 @@ if($sutun==2){ $sutun=0; echo '</tr><tr>'; }
 }
 echo '</tr></table>';
 ?>
- 
+  <br>
+<br>
 <div align="center">Sayfa<a href='anasayfa.php'>1 -> </a> <a href='anasayfa2.php'>2  </a>  </div></p>
-
-
  <?php
 						 if(isset($_SESSION["kullanici"]))
                 {

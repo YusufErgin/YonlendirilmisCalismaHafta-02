@@ -65,6 +65,7 @@ if(mysqli_num_rows($sonuc)>0){
 $liste=mysqli_fetch_array($sonuc);
 echo "Giris basarılı ";
 $_SESSION["kullanici"]=$liste['Kad'];
+$_SESSION["kullaniciId"]=$liste['KullaniciId'];
 header("location:anasayfa.php");
 
 }

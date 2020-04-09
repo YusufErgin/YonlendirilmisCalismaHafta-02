@@ -40,7 +40,7 @@ session_start();
 ob_start();
  
 echo "<option>".$_SESSION["kullanici"]."</option>";
-         
+         $as=$_SESSION["kullaniciId"];
          
          ?>   
          </select></td>
@@ -112,7 +112,7 @@ else{
 			
 		
 $sqlekle="INSERT INTO ilan(Kad,Adi,Cinsi,Yas,AsiBilgisi,ResimYolu,YorumNo,KullaniciNo,Onay,Turu) 
-VALUES ('$select2','$ad','$select','$yas','$AsiBilgisi','$resim','1','1','0','$cins')";
+VALUES ('$select2','$ad','$select','$yas','$AsiBilgisi','$resim','1','$as','0','$cins')";
 $sonuc=mysqli_query($baglan,$sqlekle);
 if($sonuc==1){echo "Kayıt basarılı ";
  //$_SESSION["kullanici"]=$sonuc["Kad"];

@@ -47,7 +47,7 @@ echo "<option>".$_SESSION["kullanici"]."</option>";
          
          ?>   
          </select></td>
-                                                              <td colspan="2" align="center"><input type="submit" name="MListeleme" id="MListeleme" value="Mesajlarımı Listele"></td>
+                                                              <td colspan="2" align="center"><input type="submit" name="MListeleme" id="MListeleme" value="İstekleri Görüntüle"></td>
 						           </tr>
 							    
 							      
@@ -67,15 +67,23 @@ echo "<table class='yazilar' align='center' width='50%' border='0' cellspacing='
 <td colspan=''> </td></tr>";
 while($satir=mysqli_fetch_array($sonuc))
 {
-if($sutun==1){ $sutun=0; echo '</tr><tr>'; }
+if($sutun==3){ $sutun=0; echo '</tr><tr>'; }
         echo '<td>
 	Gönderen Kullanıcı:
-	'.$satir['GonderenK'].' <br>Telefon Numarası :
+	'.$satir['GonderenK'].'
+ <br>Telefon Numarası :
 	'.$satir['Mesaj'].' 
 <br>Mesajınız :
 	'.$satir['Mesaj2'].' 
 <br>İlan Numarası :
 	'.$satir['ilanNo'].' 
+<br>Daha Önce Evcil hayvan beslemiş mi :
+	'.$satir['soru'].' <br>
+'."<a href='mesaj.php?islem4=sil&id=".$satir['id']."'>Basvuruyu Reddet</a>".'
+'."<a href='mesaj.php?islem3=sil&id=".$satir['id']."'>Başvuruyu Onayla</a>".'
+
+<br>
+<br>
        
 </td>';
     $sutun++;
@@ -83,6 +91,45 @@ if($sutun==1){ $sutun=0; echo '</tr><tr>'; }
 echo '</tr></table>';
 
 }
+ 
+
+if(isset($_GET["islem3"]))
+	{
+		$islem3=$_GET["islem3"];
+		
+		switch ($islem3)
+		{
+			
+			case "sil":
+			$id=$_GET['id'];
+                        $baglan=mysqli_connect("localhost","root","","yuva");
+			$sonuc2=mysqli_query($baglan,"UPDATE mesajlar SET onay ='1' WHERE mesajlar.id='$id'"); 
+			break;
+			
+			
+			
+		}
+}
+
+if(isset($_GET["islem4"]))
+	{
+		$islem4=$_GET["islem4"];
+		
+		switch ($islem4)
+		{
+			
+			case "sil":
+			$id=$_GET['id']; 
+                        $baglan=mysqli_connect("localhost","root","","yuva");
+                        $sonuc=mysqli_query($baglan,"UPDATE mesajlar SET onay='2' WHERE mesajlar.id='$id'");
+			break;
+			
+			
+			
+		}
+}
+
+
 ?>
 
 
@@ -102,18 +149,20 @@ echo "<table class='yazilar' align='center' width='50%' border='0' cellspacing='
 <td colspan=''> </td></tr>";
 while($satir=mysqli_fetch_array($sonuc))
 {
-if($sutun==2){ $sutun=0; echo '</tr><tr>'; }
+if($sutun==4){ $sutun=0; echo '</tr><tr>'; }
     echo '<td>
-	 <a><img src="'.$satir['ResimYolu'].'.jpg" width="250" height="250" border="0" /></a><br>İlan Numarası:
+	 <a><img src="'.$satir['ResimYolu'].'.jpg" width="150" height="150" border="0" /></a><br>İlan Numarası:
 	'.$satir['llanId'].'<br>Adı:
 	'.$satir['Adi'].' <br>Türü:
 	'.$satir['Cinsi'].' 
         <br>Cinsi :
         '.$satir['Turu'].'
 <br>Yaşı:
-	'.$satir['Yas'].'
-'."<a href='mesaj.php?islem2=sil&llanId=".$satir['llanId']."'>İlanı Sil</a>".'
-'."<a href='mesaj.php?islem3=sil&llanId=".$satir['llanId']."'>İlanımı Onayla</a>".'
+	'.$satir['Yas'].'<br>
+'."<a href='mesaj.php?islem2=sil&llanId=".$satir['llanId']."'>İlanı Pasif Yap</a>".'
+'."<a href='mesaj.php?islem4=sil&llanId=".$satir['llanId']."'>İlanı Aktif Yap</a>".'<br>
+'."<a href='sahiplendir.php?islem5=sil&llanId=".$satir['llanId']."'>İlanı Sahiplendir</a>".'<br>
+
 	
 </td>';
     $sutun++;
@@ -130,7 +179,7 @@ if(isset($_GET["islem2"]))
 			
 			case "sil":
 			 $id=$_GET['llanId'];
-			 $sonuc=mysqli_query($baglan,"delete from ilan where ilan.llanId='$id'");
+			 $sonuc=mysqli_query($baglan,"UPDATE ilan SET Onay ='0' WHERE ilan.llanId='$id'");
 			echo "Yorum Onaylandı";
 			header("location:mesaj.php");
 			break;
@@ -140,16 +189,39 @@ if(isset($_GET["islem2"]))
 		}
 }
 
-if(isset($_GET["islem3"]))
+
+if(isset($_GET["islem4"]))
 	{
-		$islem3=$_GET["islem3"];
+		$islem4=$_GET["islem4"];
 		
-		switch ($islem3)
+		switch ($islem4)
 		{
 			
 			case "sil":
 			 $id=$_GET['llanId'];
-			 $sonuc=mysqli_query($baglan,"UPDATE ilan SET Durum ='1' WHERE ilan.llanId='$id'");
+			 $sonuc=mysqli_query($baglan,"UPDATE ilan SET Onay ='1' WHERE ilan.llanId='$id'");
+			echo "Yorum Onaylandı";
+			header("location:mesaj.php");
+			break;
+			
+			
+			
+		}
+}
+
+
+
+
+if(isset($_GET["islem5"]))
+	{
+		$islem5=$_GET["islem5"];
+		
+		switch ($islem5)
+		{
+			
+			case "sil":
+			 $id=$_GET['llanId'];
+			 $sonuc=mysqli_query($baglan,"UPDATE ilan SET Durum ='0' WHERE ilan.llanId='$id'");
 			echo "Yorum Onaylandı";
 			header("location:mesaj.php");
 			break;

@@ -1,5 +1,4 @@
-
-<html >
+<html>
 <head>
 
 </head>
@@ -38,7 +37,7 @@
 
 <?php
 $baglan=mysqli_connect("localhost","root","","yuva");
-$sonuc=mysqli_query($baglan,"select * from ilan   where Durum='0' and Onay='1'  order by llanId asc limit 0,4"); 
+$sonuc=mysqli_query($baglan,"select * from ilan   where Durum='0' and Onay='1'  order by llanId asc limit 8,4"); 
 
 $satirr=mysqli_num_rows($sonuc);
 mysqli_set_charset($baglan, "utf8");
@@ -68,14 +67,12 @@ echo '</tr></table>';
  
 <br>
 <br>
-   <div align="center">Sayfa<a href='index.php'>1 -> </a> <a href='index2.php'>2 -> </a>  <a href='index3.php'>3 -> </a></div></p>
+ 
+
+  <div align="center">Sayfa<a href='index.php'>1 -> </a> <a href='index2.php'>2 -> </a>  <a href='index3.php'>3 -> </a></div></p>
 
 
-
-
-
-
-                <div class="widget-block">
+<div class="widget-block">
 							<h4 align="center">En Trend 3 İlan</h4>
 						<?php
 $baglan=mysqli_connect("localhost","root","","yuva");
@@ -106,17 +103,10 @@ if($sutun==3){ $sutun=0; echo '</tr><tr>'; }
 }
 echo '</tr></table>';
 ?>	
-						</div>    
-
-
-
-
-
-
+						</div>  
 
 
  <?php
-
 						 if(isset($_SESSION["kullanici"]))
                 {
                    echo "<a href='cikis.php'>ÇIKIŞ </a>";
