@@ -114,25 +114,11 @@ echo $_SESSION["kullanici"];
 
 			
 			           </tr>
-                          <tr>
-                       <td>Daha Önce Evcil Hayvan Besledim</td>
-                         </tr> 
-                         <td> <input type="radio" name="soru" value="Evet" />Evet</td>
-                         <td> <input type="radio" name="soru" value="Hayir" />Hayır</td>
-                              
-                         <?php
- if(empty($_GET['soru'])){
-   //echo "lütfen bir alan seçiniz";
-   }
-  else if(isset($_GET['soru'])){
-   $soru = $_GET['ders'];
-   echo $soru;
-}
-?>
+                        
 
                             
                                                             <tr>
-							      <td width="100" height="10">Kendinizi Tanıtın </td>
+							      <td width="100" height="10">Yorumunuz  </td>
 							       <td><textarea name="yorum" id="yorum"></textarea></td>
 						           </tr>
 
@@ -144,13 +130,13 @@ echo $_SESSION["kullanici"];
 
 
 
-							     <td colspan="2" align="center"><input type="submit" name="Sahiplen" id="Sahiplen" value="Sahiplen"></td> 
+							     <td colspan="2" align="center"><input type="submit" name="YorumYap" id="YorumYap" value="Yorum Yap"></td> 
 						        
 						        </table>
 						      </form>
 
 <?php
- if(isset($_POST["Sahiplen"])){ extract($_POST);
+ if(isset($_POST["YorumYap"])){ extract($_POST);
 $baglan=mysqli_connect("localhost","root","","yuva"); 
 mysqli_set_charset($baglan, "utf8");
  
@@ -160,11 +146,10 @@ if(empty($yorum)){
 else{
    
 	
-$sqlekle="INSERT INTO mesajlar(Mesaj,GonderenK,AliciK,Mesaj2,ilanNo,onay,soru) 
-VALUES ('$yorum','$select2','$Kad','Sahiplenmek istiyorum','$id','Beklemede','$soru')";
+$sqlekle="INSERT INTO yorum(Yorum,Durum,GonderenK,AliciK,ilanId,begeni,notbegeni) 
+VALUES ('$yorum','0',' $select2','$Kad','$id','0','0')";
 $sonuc=mysqli_query($baglan,$sqlekle);
 if($sonuc==1){echo "Kayıt basarılı ";
- //$_SESSION["kullanici"]=$sonuc["Kad"];
  header("location:anasayfa.php");
 
 }
