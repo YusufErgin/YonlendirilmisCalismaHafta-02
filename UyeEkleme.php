@@ -6,7 +6,57 @@ ob_start();
 	<head>
 		<meta charset="utf-8"/>
 		<title>Yuva-Bul</title>
-		 
+		 <style>
+.box{
+  width: 300px;
+  padding: 40px;
+  top: 50%;
+  left: 80%;
+  background: white;
+  text-align: center;
+}
+.box h1{
+  color: black;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+.box input[type = "text"],.box input[type = "password"]{
+  border:0;
+  background: none;
+  display: block;
+  margin: 20px auto;
+  text-align: center;
+  border: 2px solid #3498db;
+  padding: 14px 10px;
+  width: 200px;
+  outline: none;
+  color: black;
+  border-radius: 24px;
+  transition: 0.25s;
+}
+.box input[type = "text"]:focus,.box input[type = "password"]:focus{
+  width: 280px;
+  border-color: #2ecc71;
+}
+.box input[type = "submit"]{
+  border:0;
+  background: none;
+  display: block;
+  margin: 20px auto;
+  text-align: center;
+  border: 2px solid #2ecc71;
+  padding: 14px 40px;
+  outline: none;
+  color: black;
+  border-radius: 24px;
+  transition: 0.25s;
+  cursor: pointer;
+}
+.box input[type = "submit"]:hover{
+  background: #2ecc71;
+}
+
+</style>
 		<!--[if lt IE 9]>
 			<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
@@ -211,48 +261,19 @@ if($sutun==3){ $sutun=0; echo '</tr><tr>'; }
 		</div>
 		<!-- ENDS MAIN -->
 <div align="center">
-  <form method="POST" action="">
-<table border="0" align="center">
-<td>Kulanıcı Adı</td>
-<td><input type="text" name="ad"></td>
-</tr>
-<tr>
-<td>E-Mail</td>
-<td><input type="text" name="email"></td>
-</tr>
-<tr>
-<td>Şifre</td>
-<td><input type="password" name="sifre"></td>
-</tr>
-<tr>
-<td>Adres</td>
-<td><input type="text" name="adres"></td>
-</tr>
-<tr>
-<td>Yaşınız</td>
-<td><input type="text" name="yas"></td>
-</tr>
-<tr>
-<td>Telefon Numarası</td>
-<td><input type="text" name="gsm"></td>
-</tr>
-<tr>
-<td>Aile Sayisi</td>
-<td><input type="text" name="Asayisi"></td>
-</tr>
-<tr>
-<td>Cinsiyet</td>
-<td><input type="text" name="cinsiyet"></td>
-</tr>
-<tr>
-<td>TC</td>
-<td><input type="text" name="tc"></td>
-</tr>
-<tr>
-<td></td>
-<td><input type="submit" name="uye" value="Kaydet"></td>
-</tr>
-</table>
+  <form class="box"  method="post">
+
+  <h1>Üye Olma</h1>
+  <input type="text" name="ad" placeholder="KullanıcıAdı">
+  <input type="text" name="email" placeholder="Mail Adresi">
+  <input type="password" name="sifre" placeholder="Şifre">
+  <input type="text" name="adres" placeholder="Adres">
+  <input type="text" name="yas" placeholder="Yaşınız">
+ <input type="text" name="gsm" placeholder="Telefon Numarası">
+ <input type="text" name="Asayisi" placeholder="Aile Sayısı">
+ <input type="text" name="cinsiyet" placeholder="Cinsiyet">
+ <input type="text" name="tc" placeholder="Tc No">
+  <input type="submit" name="uye" value="Kayıt Ol">
 </form>
 
 <?php

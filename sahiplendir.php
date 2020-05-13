@@ -8,6 +8,141 @@ ob_start();
 		<meta charset="utf-8"/>
 		<title>Yuva-Bul</title>
 		 
+<style>
+.box1{
+  width: 250px;
+  padding: 0px;
+  top: 50%;
+  left: 10%;
+  background: white;
+  text-align: left;
+  position: relative;
+  left: -400px;
+  top: -10px;
+}
+.box1 h1{
+  color: black;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.box1 input{
+  border:0;
+  background: none;
+  display: block;
+  margin: 20px auto;
+  text-align: center;
+  border: 2px solid #3498db;
+  padding: 10px 5px;
+  width: 200px;
+  outline: none;
+  color: black;
+  border-radius: 24px;
+  transition: 0.25s;
+  position: relative;
+  left: 5px;
+  top: -20px;
+}
+
+.box1 input[type = "text"],.box1 input[type = "password"]{
+  border:0;
+  background: none;
+  display: block;
+  margin: 20px auto;
+  text-align: center;
+  border: 2px solid #3498db;
+  padding: 10px 5px;
+  width: 200px;
+  outline: none;
+  color: black;
+  border-radius: 24px;
+  transition: 0.25s;
+}
+
+.box1 textarea[type = "text"]{
+  border:0;
+  background: none;
+  display: block;
+  margin: 20px auto;
+  text-align: center;
+  border: 2px solid #3498db;
+  padding: 10px 5px;
+  width: 200px;
+  outline: none;
+  color: black;
+  border-radius: 24px;
+  transition: 0.25s;
+ position: relative;
+  left: -150px;
+  top: -25px;
+}
+.box1 textarea[type = "text"]:focus{
+  width: 280px;
+  border-color: #2ecc71;
+}
+.box1 select[type = "text"]{
+  border:0;
+  background: none;
+  display: block;
+  margin: 20px auto;
+  text-align: left;
+  border: 2px solid #3498db;
+  padding: 14px 10px;
+  width: 200px;
+  outline: none;
+  color: black;
+  border-radius: 24px;
+  transition: 0.25s;
+}
+.box1 select[type = "text"]:focus{
+  width: 280px;
+  border-color: #2ecc71;
+}
+.box1 input[type = "file"]{
+  border:0;
+  background: none;
+  display: block;
+  margin: 20px auto;
+  text-align: left;
+  border: 2px solid #3498db;
+  padding: 14px 10px;
+  width: 200px;
+  outline: none;
+  color: black;
+  border-radius: 24px;
+  transition: 0.25s;
+}
+.box1 input[type = "file"]:focus{
+  width: 280px;
+  border-color: #2ecc71;
+}
+
+
+.box1 input[type = "text"]:focus,.box1 input[type = "password"]:focus{
+  width: 280px;
+  border-color: #2ecc71;
+}
+.box1 input[type = "submit"]{
+  border:0;
+  background: none;
+  display: block;
+  margin: 20px auto;
+  text-align: left;
+  border: 2px solid #2ecc71;
+  padding: 14px 40px;
+  outline: none;
+  color: black;
+  border-radius: 24px;
+  transition: 0.25s;
+  cursor: pointer;
+}
+.box1 input[type = "submit"]:hover{
+  background: #2ecc71;
+}
+
+
+</style>
+
 		<!--[if lt IE 9]>
 			<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
@@ -214,30 +349,6 @@ if($sutun==3){ $sutun=0; echo '</tr><tr>'; }
 		</div>
 		<!-- ENDS MAIN -->
 <div align="center">		
-<form name="form4" method="post" action="">
-							  <table width="300" height="300" border="0" align="center">
-							    <tr>
-							     
-							      
-							      <td><label for="select2"></label>
-<label for="select2"></label>
-        <select name="select2" id="select2">
-        <?php
- 
-session_start();
-ob_start();
- 
-echo "<option>".$_SESSION["kullanici"]."</option>";
-         
-         
-         ?>   
-         </select></td>
-                                                              
-						           </tr>
-							    
-							      
-						        
-						        </table>
 <?php
 $baglan=mysqli_connect("localhost","root","","yuva");
 $sonuc=mysqli_query($baglan,"select * from ilan"); 
@@ -287,36 +398,7 @@ echo '</tr></table>';
 ?>						     
 
 
-<form method="POST" action="">
-<table border="0" align="center">
-<tr>
-<td colspan="2" align="center">Sahiplendir
- 
 
-<label for="select"></label>
-        <select name="select" id="select">
-        <?php
-         $add = $_SESSION["kullanici"];
-         $baglan=mysqli_connect("localhost","root","","yuva"); 
-         mysqli_set_charset($baglan, "utf8");
-         $sorgu=mysqli_query($baglan,"Select * from mesajlar where AliciK like '%$add'");
-         while($Turi=mysqli_fetch_array($sorgu))
-         {
-         echo "<option>".$Turi["GonderenK"]."</option>";
-
-         }
-         ?>   
-         </select></td>
-<td><input type="submit" name="sahiplendir" value="Sahiplendir"></td>
-</tr>
-
-
-						      
-
-
-
-</table>
-</form>
 
 <?php
 
@@ -335,6 +417,48 @@ $sonuc2=mysqli_query($baglan,"UPDATE ilan SET yeniSahip='$select' WHERE ilan.lla
 
 ?>
  
+<form  class="box1" name="box1" method="post" action="">
+	<table style="width:100%">
+  <tr>
+    				 
+							      <label for="select2"></label>
+<label for="select2"></label>
+        <select  type="text" name="select2" id="select2">
+        <?php
+ 
+session_start();
+ob_start();
+ 
+echo "<option>".$_SESSION["kullanici"]."</option>";
+         
+         
+         ?>   
+         </select>
+
+ <select type="text" name="select" id="select">
+        <?php
+         $add = $_SESSION["kullanici"];
+         $baglan=mysqli_connect("localhost","root","","yuva"); 
+         mysqli_set_charset($baglan, "utf8");
+         $sorgu=mysqli_query($baglan,"Select * from mesajlar where AliciK like '%$add'");
+         while($Turi=mysqli_fetch_array($sorgu))
+         {
+         echo "<option>".$Turi["GonderenK"]."</option>";
+
+         }
+         ?>   
+         </select>
+                                                            <th> <input type="submit" name="sahiplendir" id="sahiplendir" value="SAHİPLENDİR"></th>
+                                                          
+                                                          
+						          
+						      
+	
+  </tr>							        
+	</table>					     
+ </form>
+
+
 </div>
 
 

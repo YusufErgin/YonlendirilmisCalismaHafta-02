@@ -7,7 +7,57 @@ ob_start();
 	<head>
 		<meta charset="utf-8"/>
 		<title>Yuva-Bul</title>
-		 
+<style>
+.box{
+  width: 300px;
+  padding: 40px;
+  top: 50%;
+  left: 80%;
+  background: white;
+  text-align: center;
+}
+.box h1{
+  color: black;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+.box input[type = "text"],.box input[type = "password"]{
+  border:0;
+  background: none;
+  display: block;
+  margin: 20px auto;
+  text-align: center;
+  border: 2px solid #3498db;
+  padding: 14px 10px;
+  width: 200px;
+  outline: none;
+  color: black;
+  border-radius: 24px;
+  transition: 0.25s;
+}
+.box input[type = "text"]:focus,.box input[type = "password"]:focus{
+  width: 280px;
+  border-color: #2ecc71;
+}
+.box input[type = "submit"]{
+  border:0;
+  background: none;
+  display: block;
+  margin: 20px auto;
+  text-align: center;
+  border: 2px solid #2ecc71;
+  padding: 14px 40px;
+  outline: none;
+  color: black;
+  border-radius: 24px;
+  transition: 0.25s;
+  cursor: pointer;
+}
+.box input[type = "submit"]:hover{
+  background: #2ecc71;
+}
+
+</style>
 		<!--[if lt IE 9]>
 			<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
@@ -215,23 +265,18 @@ if($sutun==3){ $sutun=0; echo '</tr><tr>'; }
 		<!-- ENDS MAIN -->
 <div align="center">		
 
-<form name="form4" method="post" action="">
-							  <table width="294" height="132" border="0" align="center">
-							    <tr>
-							      <td width="91" height="37">Tür Ara</td>
-							      <td width="174"><input type="text" name="ara" id="ara"></td>
-						        </tr>
-							    <tr>
-							      <td colspan="2" align="center"><input type="submit" name="arama" id="arama" value="Ara"></td>
-						        </tr>
-						      </table>
-						  </form>
+ <form class="box"  method="post">
+
+  <h1>İlan Ara</h1>
+  <input type="text" name="ara" placeholder="Aramak İstediğiniz İlan Turu Yazın">
+  <input type="submit" name="arama" value="Arama Yap">
+</form>
 							<p>
 
 <?php
  if(isset($_POST["arama"])){ extract($_POST);
 $baglan=mysqli_connect("localhost","root","","yuva");
-$sonuc=mysqli_query($baglan,"select * from ilan where Cinsi like '%$ara'"); 
+$sonuc=mysqli_query($baglan,"select * from ilan where Turu like '%$ara'"); 
 
 $satirr=mysqli_num_rows($sonuc);
 mysqli_set_charset($baglan, "utf8");

@@ -5,8 +5,62 @@ ob_start();
 
 	<head>
 		<meta charset="utf-8"/>
+        
+
+<style>
+.box{
+  width: 300px;
+  padding: 40px;
+  top: 50%;
+  left: 80%;
+  background: white;
+  text-align: center;
+}
+.box h1{
+  color: black;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+.box input[type = "text"],.box input[type = "password"]{
+  border:0;
+  background: none;
+  display: block;
+  margin: 20px auto;
+  text-align: center;
+  border: 2px solid #3498db;
+  padding: 14px 10px;
+  width: 200px;
+  outline: none;
+  color: black;
+  border-radius: 24px;
+  transition: 0.25s;
+}
+.box input[type = "text"]:focus,.box input[type = "password"]:focus{
+  width: 280px;
+  border-color: #2ecc71;
+}
+.box input[type = "submit"]{
+  border:0;
+  background: none;
+  display: block;
+  margin: 20px auto;
+  text-align: center;
+  border: 2px solid #2ecc71;
+  padding: 14px 40px;
+  outline: none;
+  color: black;
+  border-radius: 24px;
+  transition: 0.25s;
+  cursor: pointer;
+}
+.box input[type = "submit"]:hover{
+  background: #2ecc71;
+}
+
+</style>
+
+
 		<title>Yuva-Bul</title>
-		 
 		<!--[if lt IE 9]>
 			<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
@@ -190,15 +244,13 @@ if($sutun==3){ $sutun=0; echo '</tr><tr>'; }
 		<!-- MAIN -->
 		<div id="main">
 			<div class="wrapper cf">
-			
-			
-			
+					
 			
 				
 			<!-- featured -->
 			<div class="home-featured">
 				<ul id="filter-buttons">
-					<li><a href="#" data-filter="*" class="selected">İlanlar</a></li>
+					
 					
 				
 				</ul>
@@ -211,28 +263,12 @@ if($sutun==3){ $sutun=0; echo '</tr><tr>'; }
 		</div>
 		<!-- ENDS MAIN -->
 <div align="center">
-                  <form method="POST" action="">
-<table border="0" align="center">
-<tr>
-<td colspan="2" align="center"> Kullanıcı Giriş</td>
- 
-</tr>
-<td>Kullanıcı Adı</td>
-<td><input type="text" name="ad"></td>
-</tr>
-<tr>
-<td>Şifre</td>
-<td><input type="password" name="sifre"></td>
-</tr>
-<tr>
-<td></td>
-<td><input type="submit" name="uye" value="Giriş Yap"></td>
-</tr>
-<tr>
-<td></td>
-<td><input type="submit" name="sifreY" value="Şifremi Unuttum"></td>
-</tr>
-</table>
+			 <form class="box"  method="post">
+
+  <h1>Üye Giriş</h1>
+  <input type="text" name="ad" placeholder="KullanıcıAdı">
+  <input type="password" name="sifre" placeholder="Şifre">
+  <input type="submit" name="uye" value="Giriş">
 </form>
 
 <?php
@@ -260,7 +296,10 @@ else{echo "Hatalı giriş";}
 }
 
 ?>
-</div> 		<!-- FOOTER -->
+	</div>	
+
+                 
+		<!-- FOOTER -->
 		<footer>
 			<div class="wrapper cf">
 			

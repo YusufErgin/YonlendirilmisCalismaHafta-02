@@ -7,7 +7,173 @@ ob_start();
 	<head>
 		<meta charset="utf-8"/>
 		<title>Yuva-Bul</title>
-		 
+		 <style>
+.box1{
+  width: 250px;
+  padding: 0px;
+  top: 50%;
+  left: 10%;
+  background: white;
+  text-align: left;
+  position: relative;
+  left: -400px;
+  top: -10px;
+}
+.box1 h1{
+  color: black;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+.yazi{
+  color: black;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+.box1 input{
+  border:0;
+  background: none;
+  display: block;
+  margin: 20px auto;
+  text-align: center;
+  border: 2px solid #3498db;
+  padding: 10px 5px;
+  width: 200px;
+  outline: none;
+  color: black;
+  border-radius: 24px;
+  transition: 0.25s;
+  position: relative;
+  left: 5px;
+  top: -10px;
+}
+
+.box1 input[type = "text"],.box1 input[type = "password"]{
+  border:0;
+  background: none;
+  display: block;
+  margin: 20px auto;
+  text-align: center;
+  border: 2px solid #3498db;
+  padding: 10px 5px;
+  width: 200px;
+  outline: none;
+  color: black;
+  border-radius: 24px;
+  transition: 0.25s;
+}
+.box1 input[type = "radio"]{
+  border:0;
+  background: none;
+  display: block;
+  margin: 20px auto;
+  text-align: center;
+  border: 2px solid #3498db;
+  padding: 10px 5px;
+  width: 200px;
+  outline: none;
+  color: black;
+  border-radius: 24px;
+  transition: 0.25s;
+}
+
+.box1 input[type = "radio"]{
+  border:0;
+  background: none;
+  display: block;
+  margin: 20px auto;
+  text-align: center;
+  border: 2px solid #3498db;
+  padding: 10px 0px;
+  width: 200px;
+  outline: none;
+  color: black;
+  border-radius: 24px;
+  transition: 0.25s;
+}
+
+.box1 textarea[type = "text"]{
+  border:0;
+  background: none;
+  display: block;
+  margin: 20px auto;
+  text-align: center;
+  border: 2px solid #3498db;
+  padding: 10px 5px;
+  width: 200px;
+  outline: none;
+  color: black;
+  border-radius: 24px;
+  transition: 0.25s;
+ position: relative;
+  left: 10px;
+  top: -25px;
+}
+.box1 textarea[type = "text"]:focus{
+  width: 280px;
+  border-color: #2ecc71;
+}
+.box1 select[type = "text"]{
+  border:0;
+  background: none;
+  display: block;
+  margin: 20px auto;
+  text-align: left;
+  border: 2px solid #3498db;
+  padding: 14px 10px;
+  width: 200px;
+  outline: none;
+  color: black;
+  border-radius: 24px;
+  transition: 0.25s;
+}
+.box1 select[type = "text"]:focus{
+  width: 280px;
+  border-color: #2ecc71;
+}
+.box1 input[type = "file"]{
+  border:0;
+  background: none;
+  display: block;
+  margin: 20px auto;
+  text-align: left;
+  border: 2px solid #3498db;
+  padding: 14px 10px;
+  width: 200px;
+  outline: none;
+  color: black;
+  border-radius: 24px;
+  transition: 0.25s;
+}
+.box1 input[type = "file"]:focus{
+  width: 280px;
+  border-color: #2ecc71;
+}
+
+
+.box1 input[type = "text"]:focus,.box1 input[type = "password"]:focus{
+  width: 280px;
+  border-color: #2ecc71;
+}
+.box1 input[type = "submit"]{
+  border:0;
+  background: none;
+  display: block;
+  margin: 20px auto;
+  text-align: left;
+  border: 2px solid #2ecc71;
+  padding: 14px 40px;
+  outline: none;
+  color: black;
+  border-radius: 24px;
+  transition: 0.25s;
+  cursor: pointer;
+}
+.box1 input[type = "submit"]:hover{
+  background: #2ecc71;
+}
+
+
+</style>
 		<!--[if lt IE 9]>
 			<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
@@ -247,27 +413,26 @@ echo '</tr></table>';
 
 ?>
  </form>
-                                                         
-                                                          <form name="form5" method="post" action="">
-							  <table width="350" height="0" border="0" align="center">
-							    <tr>
-							      <td width="200" height="0">Kullanıcı Adınız : </td>
-							      
-<td width="100" height="10">
+                  
+<form  class="box1" name="box1" method="post" action="">
+	<table style="width:100%">
+  <tr>
+    				 
+							      <label for="select2"></label>
+<label for="select2"></label>
+        <select  type="text" name="select2" id="select2">
         <?php
  
 session_start();
 ob_start();
- $select2=$_SESSION["kullanici"];
-echo $_SESSION["kullanici"];    
+ 
+echo "<option>".$_SESSION["kullanici"]."</option>";
+         
+         
          ?>   
-         </td>
-						           </tr>
-							    <tr>
-							      <td width="100" height="10">İlan Sahibi </td>
-							      <td width="100">
-        
-        <select name="Kad" id="Kad">
+         </select>
+
+ <select type="text" name="Kad" id="Kad">
         <?php
          $id=$_GET['llanId'];
          $baglan=mysqli_connect("localhost","root","","yuva"); 
@@ -280,59 +445,39 @@ echo $_SESSION["kullanici"];
          }
 
          ?>   
-     </select> </td>
-
-
-						           </tr>
-
-
-<tr>
-							      <td width="100" height="10">İlan No </td>
-							      <td width="100">
-        
-        <?php
+         </select>
+         <select type="text" name="id" id="id">  
+         <?php
          $id=$_GET['llanId'];
-         echo $id=$_GET['llanId'];
-         ?>   
-        </td>
+         $baglan=mysqli_connect("localhost","root","","yuva"); 
+         mysqli_set_charset($baglan, "utf8");
+         $sorgu=mysqli_query($baglan,"Select * from ilan where llanId='$id'");
+         while($Kad=mysqli_fetch_array($sorgu))
+         {
+         echo "<option>".$Kad["llanId"]."</option>";
+        
+         }
+         ?>
+           </select>   
 
 
-			
-			           </tr>
-                          <tr>
-                       <td>Daha Önce Evcil Hayvan Besledim</td>
-                         </tr> 
-                         <td> <input type="radio" name="soru" value="Evet" />Evet</td>
-                         <td> <input type="radio" name="soru" value="Hayir" />Hayır</td>
-                              
-                         <?php
- if(empty($_GET['soru'])){
-   //echo "lütfen bir alan seçiniz";
-   }
-  else if(isset($_GET['soru'])){
-   $soru = $_GET['ders'];
-   echo $soru;
-}
-?>
+<input  type="text"  name="soru" id="soru"placeholder="Daha Önce Evcil Hayvan Besledinizmi ?"/>
 
-                            
-                                                            <tr>
-							      <td width="100" height="10">Kendinizi Tanıtın </td>
-							       <td><textarea name="yorum" id="yorum"></textarea></td>
-						           </tr>
+<textarea  type="text"  name="yorum" id="yorum"placeholder="Kendinizi Tanıtın"></textarea>
 
 
+                                            <th> <input type="submit" name="Sahiplen" id="Sahiplen" value="Basvuru Yap"></th>
+                                                          
+                                                          
+						          
+						      
+	
+  </tr>							        
+	</table>					     
+ </form>
 
-
-
-</tr>
-
-
-
-							     <td colspan="2" align="center"><input type="submit" name="Sahiplen" id="Sahiplen" value="Basvuru Yap"></td> 
-						        
-						        </table>
-						      </form>
+                                       
+                                                          
 
 <?php
  if(isset($_POST["Sahiplen"])){ extract($_POST);

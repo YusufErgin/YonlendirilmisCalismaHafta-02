@@ -6,8 +6,128 @@ ob_start();
 
 	<head>
 		<meta charset="utf-8"/>
-		<title>Yuva-Bul</title>
-		 
+		<title>Yuva-Bul</title>	 
+<style>
+
+.yazi{
+  color: black;
+  text-transform: uppercase;
+  font-style: oblique;
+  font-size:15px;
+}
+
+
+.box1{
+  width: 300px;
+  padding: 0px;
+  top: 50%;
+  left: 10%;
+  background: white;
+  text-align: left;
+  position: relative;
+  left: -400px;
+  top: -20px;
+}
+.box1 h1{
+  color: black;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.box1 input{
+  border:0;
+  background: none;
+  display: block;
+  margin: 20px auto;
+  text-align: center;
+  border: 2px solid #3498db;
+  padding: 10px 5px;
+  width: 200px;
+  outline: none;
+  color: black;
+  border-radius: 24px;
+  transition: 0.25s;
+  position: relative;
+  left: 50px;
+  top: -20px;
+}
+
+.box1 input[type = "text"],.box1 input[type = "password"]{
+  border:0;
+  background: none;
+  display: block;
+  margin: 20px auto;
+  text-align: center;
+  border: 2px solid #3498db;
+  padding: 10px 5px;
+  width: 200px;
+  outline: none;
+  color: black;
+  border-radius: 24px;
+  transition: 0.25s;
+}
+.box1 select[type = "text"]{
+  border:0;
+  background: none;
+  display: block;
+  margin: 20px auto;
+  text-align: left;
+  border: 2px solid #3498db;
+  padding: 14px 10px;
+  width: 200px;
+  outline: none;
+  color: black;
+  border-radius: 24px;
+  transition: 0.25s;
+}
+.box1 select[type = "text"]:focus{
+  width: 280px;
+  border-color: #2ecc71;
+}
+.box1 input[type = "file"]{
+  border:0;
+  background: none;
+  display: block;
+  margin: 20px auto;
+  text-align: left;
+  border: 2px solid #3498db;
+  padding: 14px 10px;
+  width: 200px;
+  outline: none;
+  color: black;
+  border-radius: 24px;
+  transition: 0.25s;
+}
+.box1 input[type = "file"]:focus{
+  width: 280px;
+  border-color: #2ecc71;
+}
+
+
+.box1 input[type = "text"]:focus,.box1 input[type = "password"]:focus{
+  width: 280px;
+  border-color: #2ecc71;
+}
+.box1 input[type = "submit"]{
+  border:0;
+  background: none;
+  display: block;
+  margin: 20px auto;
+  text-align: left;
+  border: 2px solid #2ecc71;
+  padding: 14px 40px;
+  outline: none;
+  color: black;
+  border-radius: 24px;
+  transition: 0.25s;
+  cursor: pointer;
+}
+.box1 input[type = "submit"]:hover{
+  background: #2ecc71;
+}
+
+</style>
+
 		<!--[if lt IE 9]>
 			<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
@@ -214,14 +334,13 @@ if($sutun==3){ $sutun=0; echo '</tr><tr>'; }
 		</div>
 		<!-- ENDS MAIN -->
 <div align="center">		
-<form name="form4" method="post" action="">
-							  <table width="300" height="300" border="0" align="center">
-							    <tr>
-							     
-							      <td width="100" height="100">Kullanıcı Adınız </td>
-							      <td><label for="select2"></label>
+<form  class="box1" name="box1" method="post" action="">
+	<table style="width:100%">
+  <tr>
+    				 
+							      <label for="select2"></label>
 <label for="select2"></label>
-        <select name="select2" id="select2">
+        <select  type="text" name="select2" id="select2">
         <?php
  
 session_start();
@@ -231,17 +350,19 @@ echo "<option>".$_SESSION["kullanici"]."</option>";
          
          
          ?>   
-         </select></td>
-                                                              <td colspan="2" align="center"><input type="submit" name="MListeleme" id="MListeleme" value="İstekleri Görüntüle">
-                                                              <input type="submit" name="basvurularim" id="basvurularim" value="Başvurularım">
-                                                               <input type="submit" name="sorularim" id="sorularim" value="Gelen Soru">
-<input type="submit" name="cevaplar" id="cevaplar" value="Gelen Cevaplar"></td></td>
-						           </tr>
+         </select>
+                                                            <th> <input type="submit" name="MListeleme" id="MListeleme" value="İstekleri Görüntüle"></th>
+                                                            <th> <input type="submit" name="basvurularim" id="basvurularim" value="Başvurularım"></th>
+                                                             <th> <input type="submit" name="sorularim" id="sorularim" value="Gelen Soru"></th>
+                                                             <th> <input type="submit" name="cevaplar" id="cevaplar" value="Gelen Cevaplar"></th>
+						          
 						      
-						        
-						        </table>
+	
+  </tr>							        
+	</table>					     
+ </form>
 <?php
- if(isset($_POST["MListeleme"])){ extract($_POST);
+ if(isset($_POST["MListeleme"])){extract($_POST);
 $baglan=mysqli_connect("localhost","root","","yuva");
 $sonuc=mysqli_query($baglan,"select * from mesajlar where AliciK like '%$select2'"); 
 
@@ -250,11 +371,11 @@ mysqli_set_charset($baglan, "utf8");
 if($satirr<=0) { echo "<h>  </h>"; return; }
 $sutun=0;
 echo "<h2 align='center'></h2>";
-echo "<table class='yazilar' align='center' width='50%' border='0' cellspacing='0' cellpadding='0'><tr>
+echo "<table class='yazi' align='center' width='50%' border='0' cellspacing='0' cellpadding='0'><tr>
 <td colspan=''> </td></tr>";
 while($satir=mysqli_fetch_array($sonuc))
 {
-if($sutun==3){ $sutun=0; echo '</tr><tr>'; }
+if($sutun==1){ $sutun=0; echo '</tr><tr>'; }
         echo '<td>
 	Gönderen Kullanıcı:
 	'.$satir['GonderenK'].'
@@ -347,11 +468,11 @@ mysqli_set_charset($baglan, "utf8");
 if($satirr<=0) { echo "<h>  </h>"; return; }
 $sutun=0;
 echo "<h2 align='center'></h2>";
-echo "<table class='yazilar' align='center' width='50%' border='0' cellspacing='0' cellpadding='0'><tr>
+echo "<table class='yazi' align='center' width='50%' border='0' cellspacing='0' cellpadding='0'><tr>
 <td colspan=''> </td></tr>";
 while($satir=mysqli_fetch_array($sonuc))
 {
-if($sutun==3){ $sutun=0; echo '</tr><tr>'; }
+if($sutun==1){ $sutun=0; echo '</tr><tr>'; }
         echo '<td>
 	İlan Sahibi:
 	'.$satir['AliciK'].'
@@ -376,18 +497,18 @@ if(isset($_POST["sorularim"])){ extract($_POST);
 $ad=$_SESSION["kullanici"];
 $baglan=mysqli_connect("localhost","root","","yuva");
 
-$sonuc=mysqli_query($baglan,"select * from soru where  AliciK like '%$ad'"); 
+$sonuc=mysqli_query($baglan,"select * from soru where  AliciK like '%$ad' and durum='0'"); 
 $satirr=mysqli_num_rows($sonuc);
 mysqli_set_charset($baglan, "utf8");
 
 if($satirr<=0) { echo "<h>  </h>"; return; }
 $sutun=0;
 echo "<h2 align='center'></h2>";
-echo "<table class='yazilar' align='center' width='50%' border='0' cellspacing='0' cellpadding='0'><tr>
+echo "<table class='yazi' align='center' width='50%' border='0' cellspacing='0' cellpadding='0'><tr>
 <td colspan=''> </td></tr>";
 while($satir=mysqli_fetch_array($sonuc))
 {
-if($sutun==3){ $sutun=0; echo '</tr><tr>'; }
+if($sutun==1){ $sutun=0; echo '</tr><tr>'; }
         echo '<td>
 	Soran Kişi:
 	'.$satir['GonderenK'].'
@@ -417,22 +538,24 @@ mysqli_set_charset($baglan, "utf8");
 if($satirr<=0) { echo "<h>  </h>"; return; }
 $sutun=0;
 echo "<h2 align='center'></h2>";
-echo "<table class='yazilar' align='center' width='50%' border='0' cellspacing='0' cellpadding='0'><tr>
+echo "<table class='yazi' align='center' width='50%' border='0' cellspacing='0' cellpadding='0'><tr>
 <td colspan=''> </td></tr>";
 while($satir=mysqli_fetch_array($sonuc))
 {
-if($sutun==3){ $sutun=0; echo '</tr><tr>'; }
+if($sutun==1){ $sutun=0; echo '</tr><tr>'; }
         echo '<td>
+Sorunuz :
+	'.$satir['soru'].'  ? <BR>
+Cevap :
+	'.$satir['cevap'].' <BR>
 	  Cevaplayan  Kişi:
 	'.$satir['AliciK'].'
-<br>Sorunuz :
-	'.$satir['soru'].' <BR>
-<br>Cevap :
-	'.$satir['cevap'].' <BR>
+
+
 
 <br>
 <br>
-<br>
+
        
 </td>';
     $sutun++;

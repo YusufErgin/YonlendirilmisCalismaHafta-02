@@ -5,6 +5,100 @@ ob_start();
 <html class="no-js">
 
 	<head>
+
+
+<style>
+.box{
+  width: 300px;
+  padding: 40px;
+  top: 50%;
+  left: 80%;
+  background: white;
+  text-align: center;
+}
+.box h1{
+  color: black;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+.box input[type = "text"],.box input[type = "password"]{
+  border:0;
+  background: none;
+  display: block;
+  margin: 20px auto;
+  text-align: center;
+  border: 2px solid #3498db;
+  padding: 14px 10px;
+  width: 200px;
+  outline: none;
+  color: black;
+  border-radius: 24px;
+  transition: 0.25s;
+}
+.box textarea[type = "text"]{
+  border:0;
+  background: none;
+  display: block;
+  margin: 20px auto;
+  text-align: center;
+  border: 2px solid #3498db;
+  padding: 14px 10px;
+  width: 200px;
+  outline: none;
+  color: black;
+  border-radius: 24px;
+  transition: 0.25s;
+}
+
+.box textarea[type = "text"]:focus{
+  width: 280px;
+  border-color: #2ecc71;
+}
+
+
+.box select[type = "text"]{
+  border:0;
+  background: none;
+  display: block;
+  margin: 20px auto;
+  text-align: center;
+  border: 2px solid #3498db;
+  padding: 14px 10px;
+  width: 200px;
+  outline: none;
+  color: black;
+  border-radius: 24px;
+  transition: 0.25s;
+}
+.box select[type = "text"]:focus{
+  width: 280px;
+  border-color: #2ecc71;
+}
+
+.box input[type = "text"]:focus,.box input[type = "password"]:focus{
+  width: 280px;
+  border-color: #2ecc71;
+}
+.box input[type = "submit"]{
+  border:0;
+  background: none;
+  display: block;
+  margin: 20px auto;
+  text-align: center;
+  border: 2px solid #2ecc71;
+  padding: 14px 40px;
+  outline: none;
+  color: black;
+  border-radius: 24px;
+  transition: 0.25s;
+  cursor: pointer;
+}
+.box input[type = "submit"]:hover{
+  background: #2ecc71;
+}
+
+</style>
+
 		<meta charset="utf-8"/>
 		<title>Yuva-Bul</title>
 		 
@@ -248,77 +342,47 @@ echo '</tr></table>';
 ?>
  </form>
                                                          
-                                                          <form name="form5" method="post" action="">
-							  <table width="350" height="0" border="0" align="center">
-							    <tr>
-							      <td width="200" height="0">Kullanıcı Adınız : </td>
-							      
-<td width="100" height="10">
+   <form class="box"  method="post">
+
+  <h1>Yorum Yap</h1>
+
+ <select type="text" name="select2" id="select2">
         <?php
- 
 session_start();
 ob_start();
  $select2=$_SESSION["kullanici"];
-echo $_SESSION["kullanici"];    
-         ?>   
-         </td>
-						           </tr>
-							    <tr>
-							      <td width="100" height="10">İlan Sahibi </td>
-							      <td width="100">
+ $baglan=mysqli_connect("localhost","root","","yuva"); 
+         mysqli_set_charset($baglan, "utf8");
+         $sorgu=mysqli_query($baglan,"Select * from kullanici where Kad='$select2'");
+         while($Kad=mysqli_fetch_array($sorgu))
+         {
+         echo "<option>".$Kad["Kad"]."</option>";
         
-        <select name="Kad" id="Kad">
-        <?php
+         }
+   
+         ?>   
+  </select>
+						  
+
+
+ <select type="text" name="id" id="id">
+         <?php
          $id=$_GET['llanId'];
          $baglan=mysqli_connect("localhost","root","","yuva"); 
          mysqli_set_charset($baglan, "utf8");
          $sorgu=mysqli_query($baglan,"Select * from ilan where llanId='$id'");
          while($Kad=mysqli_fetch_array($sorgu))
          {
-         echo "<option>".$Kad["Kad"]."</option>";
+         echo "<option>".$Kad["llanId"]."</option>";
         
          }
 
-         ?>   
-     </select> </td>
+         ?> 
+ </select>
 
-
-						           </tr>
-
-
-<tr>
-							      <td width="100" height="10">İlan No </td>
-							      <td width="100">
-        
-        <?php
-         $id=$_GET['llanId'];
-         echo $id=$_GET['llanId'];
-         ?>   
-        </td>
-
-
-			
-			           </tr>
-                        
-
-                            
-                                                            <tr>
-							      <td width="100" height="10">Yorumunuz  </td>
-							       <td><textarea name="yorum" id="yorum"></textarea></td>
-						           </tr>
-
-
-
-
-
-</tr>
-
-
-
-							     <td colspan="2" align="center"><input type="submit" name="YorumYap" id="YorumYap" value="Yorum Yap"></td> 
-						        
-						        </table>
-						      </form>
+  <textarea type="text" name="yorum" placeholder="Yorumunuz"></textarea>
+  <input type="submit" name="YorumYap" value="Paylaş">
+</form>                                                       
 
 <?php
  if(isset($_POST["YorumYap"])){ extract($_POST);
@@ -331,8 +395,8 @@ if(empty($yorum)){
 else{
    
 	
-$sqlekle="INSERT INTO yorum(Yorum,Durum,GonderenK,AliciK,ilanId,begeni,notbegeni) 
-VALUES ('$yorum','0',' $select2','$Kad','$id','0','0')";
+$sqlekle="INSERT INTO yorum(Yorum,Durum,GonderenK,AliciK,AliciK2,resim1,resim2,ilanId,begeni,notbegeni) 
+VALUES ('$yorum','0',' $select2','','','img/like3.png','img/like1.png','$id','0','0')";
 $sonuc=mysqli_query($baglan,$sqlekle);
 if($sonuc==1){echo "Kayıt basarılı ";
  header("location:anasayfa.php");

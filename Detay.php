@@ -5,9 +5,11 @@ ob_start();
 <html class="no-js">
 
 	<head>
+
 		<meta charset="utf-8"/>
 		<title>Yuva-Bul</title>
 		 
+
 		<!--[if lt IE 9]>
 			<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
@@ -201,7 +203,7 @@ if($sutun==3){ $sutun=0; echo '</tr><tr>'; }
 			<!-- featured -->
 			<div class="home-featured">
 				<ul id="filter-buttons">
-					<li><a href="#" data-filter="*" class="selected">İlanlar</a></li>
+					
 					
 				
 				</ul>
@@ -214,15 +216,14 @@ if($sutun==3){ $sutun=0; echo '</tr><tr>'; }
 		</div>
 		<!-- ENDS MAIN -->
 <div align="center">		
-<div align="center">İlan Detay</div></p>
+<div align="center"><h2 align="center">İlan Detayı</h2></div></p>
 
 <?php
 $baglan=mysqli_connect("localhost","root","","yuva");
 $sonuc=mysqli_query($baglan,"select * from ilan"); 
 $satirr=mysqli_num_rows($sonuc);
 mysqli_set_charset($baglan, "utf8");
-
-	if(isset($_GET["islem"]))
+if(isset($_GET["islem"]))
 	{
 		$islem=$_GET["islem"];
 		
@@ -230,6 +231,7 @@ mysqli_set_charset($baglan, "utf8");
 		{
 
                        case "sil":  
+	 
                         $id=$_GET['llanId'];
                         $baglan=mysqli_connect("localhost","root","","yuva");
 $sonuc2=mysqli_query($baglan,"UPDATE ilan SET hit =hit+1 WHERE ilan.llanId='$id'"); 
@@ -258,41 +260,45 @@ $satir=mysqli_fetch_array($sonuc);
 </td>';
 }
 echo '</tr></table>';
-			break;
+	break;
 		}
 
  
-}
+}		
 
 ?>
- <?php	
 
+
+
+
+ <?php
+session_start();
+$select2=$_SESSION["kullanici"];
 $id=$_GET['llanId'];
 $baglan=mysqli_connect("localhost","root","","yuva");
 $sonuc=mysqli_query($baglan,"select * from yorum where ilanId='$id'"); 
 $satirr=mysqli_num_rows($sonuc);
 mysqli_set_charset($baglan, "utf8");
-echo "Yorumlar";
+//echo "Yorumlar";
 if($satirr<=0) { echo "<h>  </h>"; return; }
 $sutun=0;
-echo "<h2 align='center'></h2>";
+echo "<h2 align='center'>Yorumlar</h2>";
 echo "<table class='yazilar' align='center' width='50%' border='0' cellspacing='0' cellpadding='0'><tr>
 <td colspan=''> </td></tr>";
 while($satir=mysqli_fetch_array($sonuc))
 {
 if($sutun==1){ $sutun=0; echo '</tr><tr>'; }
     echo '<td>
-	
-       '.$satir['GonderenK'].' : 
-       '.$satir['Yorum'].'
-       '.$satir['begeni'].'
-       '."<a href='Detay.php?islem10=sil&llanId=".$satir['ilanId']."'> <img src='img/like.png' width='20' height='15' border='0'/></a>".' 
+         '."<a> <img src='img/kad.jpg' width='60' height='50' border='0'/></a>".'  
+         '.$satir['GonderenK'].'   :   
+         '.$satir['Yorum'].' 
+'.$satir['begeni'].'         
+'."<a href='Detay.php?islem10=sil&yorum=".$satir['YorumId']."'>  <img src='".$satir['resim1']."' width='30' height='25' border='0' />    </a>".' 
        '.$satir['notbegeni'].'
-       '."<a href='Detay.php?islem11=sil&llanId=".$satir['ilanId']."'> <img src='img/notlike.jpg' width='20' height='15' border='0'/></a>".'  
+       '."<a href='Detay.php?islem11=sil&yorum=".$satir['YorumId']."'>  <img src='".$satir['resim2']."' width='30' height='25' border='0' />        </a>".'  
 	<br>
 <br>
-
-</td>';
+         </td>';
     $sutun++;
 }
 echo '</tr></table>';
@@ -309,6 +315,10 @@ if(isset($_GET["islem10"]))
 			$id=$_GET['yorum'];
 		        $sonuc=mysqli_query($baglan,"UPDATE yorum SET begeni =begeni+1 WHERE yorum.YorumId='$id' and AliciK not like '%$select2'");
                         $sonuc2=mysqli_query($baglan,"UPDATE yorum SET AliciK='$select2' WHERE yorum.YorumId='$id'");
+                        $sonuc4=mysqli_query($baglan,"UPDATE yorum SET notbegeni =notbegeni-1 WHERE yorum.YorumId='$id' and AliciK2  like '%$select2'");
+                        $sonuc5=mysqli_query($baglan,"UPDATE yorum SET AliciK2='' WHERE yorum.YorumId='$id'");
+                        $sonuc5=mysqli_query($baglan,"UPDATE yorum SET resim1='img/like4.png' WHERE yorum.YorumId='$id'");
+                        $sonuc5=mysqli_query($baglan,"UPDATE yorum SET resim2='img/like1.png' WHERE yorum.YorumId='$id'");
                         header("location:anasayfa.php");   
 			break; 
                        
@@ -324,8 +334,12 @@ if(isset($_GET["islem11"]))
 			
 			case "sil":
 			$id=$_GET['yorum'];
-		        $sonuc=mysqli_query($baglan,"UPDATE yorum SET notbegeni =notbegeni+1 WHERE yorum.YorumId='$id' and AliciK not like '%$select2'");
-                        $sonuc2=mysqli_query($baglan,"UPDATE yorum SET AliciK='$select2' WHERE yorum.YorumId='$id'");
+		        $sonuc=mysqli_query($baglan,"UPDATE yorum SET notbegeni =notbegeni+1 WHERE yorum.YorumId='$id' and AliciK2  not like '%$select2'");
+                        $sonuc3=mysqli_query($baglan,"UPDATE yorum SET AliciK2='$select2' WHERE yorum.YorumId='$id'");
+                        $sonuc4=mysqli_query($baglan,"UPDATE yorum SET begeni =begeni-1 WHERE yorum.YorumId='$id' and AliciK  like '%$select2'");
+                        $sonuc5=mysqli_query($baglan,"UPDATE yorum SET AliciK='' WHERE yorum.YorumId='$id'");
+                        $sonuc6=mysqli_query($baglan,"UPDATE yorum SET resim1='img/like3.png' WHERE yorum.YorumId='$id'");
+                        $sonuc7=mysqli_query($baglan,"UPDATE yorum SET resim2='img/like2.png' WHERE yorum.YorumId='$id'");
                         header("location:anasayfa.php");   
 			break;
 
@@ -337,6 +351,7 @@ if(isset($_GET["islem11"]))
 
 
 ?>
+
 </div> 
 
 
@@ -388,7 +403,7 @@ echo '</tr></table>';
                 {
        
                    echo "<a href='cikis.php'>ÇIKIŞ </a>";
-                    echo "</p>";
+                   echo "</p>";
 
                 }
                 else
