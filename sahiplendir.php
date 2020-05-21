@@ -14,7 +14,7 @@ ob_start();
   padding: 0px;
   top: 50%;
   left: 10%;
-  background: white;
+  background: ;
   text-align: left;
   position: relative;
   left: -400px;

@@ -12,7 +12,7 @@ ob_start();
   padding: 40px;
   top: 50%;
   left: 80%;
-  background: white;
+  background: ;
   text-align: center;
 }
 .box h1{

@@ -13,7 +13,7 @@ ob_start();
   padding: 0px;
   top: 50%;
   left: 10%;
-  background: white;
+  background:;
   text-align: left;
   position: relative;
   left: -400px;
@@ -490,8 +490,8 @@ if(empty($yorum)){
 else{
    
 	
-$sqlekle="INSERT INTO mesajlar(Mesaj,GonderenK,AliciK,Mesaj2,ilanNo,onay,soru) 
-VALUES ('$yorum','$select2','$Kad','Sahiplenmek istiyorum','$id','Beklemede','$soru')";
+$sqlekle="INSERT INTO mesajlar(Mesaj,GonderenK,AliciK,Mesaj2,ilanNo,onay,soru,SSor) 
+VALUES ('$yorum','$select2','$Kad','Sahiplenmek istiyorum','$id','Beklemede','$soru','Daha Önce Evcil Hayvan Beslediniz mi ?')";
 $sonuc=mysqli_query($baglan,$sqlekle);
 if($sonuc==1){echo "Kayıt basarılı ";
  //$_SESSION["kullanici"]=$sonuc["Kad"];

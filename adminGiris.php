@@ -44,6 +44,18 @@
 						  </form>
 
 
+<form name="form5" method="post" action="">
+							  <table width="294" height="132" border="0" align="center">
+							    <tr>
+							      <td>Yorumları Listele</td>
+							      <td colspan="2" align="center"><input type="submit" name="liste4" id="liste4" value="Listele"></td>
+						           </tr>
+						
+						      </table>
+						  </form>
+
+
+
 <?php
  if(isset($_POST["liste3"])){ extract($_POST);
 $baglan=mysqli_connect("localhost","root","","yuva");
@@ -218,7 +230,79 @@ if(isset($_GET["islem2"]))
 ?>
 
 
+<?php
+ if(isset($_POST["liste4"])){ extract($_POST);
+$baglan=mysqli_connect("localhost","root","","yuva");
+$sonuc=mysqli_query($baglan,"select * from yorum where Durum='0'"); 
 
+$satirr=mysqli_num_rows($sonuc);
+mysqli_set_charset($baglan, "utf8");
+if($satirr<=0) { echo "<h>  </h>"; return; }
+$sutun=0;
+echo "<h2 align='center'></h2>";
+echo "<table class='yazilar' align='center' width='50%' border='0' cellspacing='0' cellpadding='0'><tr>
+<td colspan=''> </td></tr>";
+while($satir=mysqli_fetch_array($sonuc))
+{
+if($sutun==2){ $sutun=0; echo '</tr><tr>'; }
+    echo '<td>
+	
+<br>Yorum Yapan Kullanıcı:
+	'.$satir['GonderenK'].' <br>Yorumu:
+	'.$satir['Yorum'].' <br>
+Yorum Yapılan İlan : '.$satir['ilanId'].' <br>
+'."<a href='adminGiris.php?islem=sil&llanId=".$satir['YorumId']."'>Yorumu Onayla</a>".' ---
+'."<a href='adminGiris.php?islem2=sil&llanId=".$satir['YorumId']."'>Yorumu Kaldır</a>".'
+
+</td>';
+    $sutun++;
+}
+echo '</tr>
+</table>';
+
+
+
+
+		if(isset($_GET["islem"]))
+	{
+		$islem=$_GET["islem"];
+		
+		switch ($islem)
+		{
+
+                        case "sil":  
+                        $id=$_GET['llanId'];
+                        $sonuc=mysqli_query($baglan,"UPDATE yorum SET Durum ='1' WHERE yorum.YorumId='$id'");   
+		        echo "Yorum Onaylandı";
+			header("location:adminGiris.php");
+			break;
+		}
+}
+
+if(isset($_GET["islem2"]))
+	{
+		$islem2=$_GET["islem2"];
+		
+		switch ($islem2)
+		{
+			
+			case "sil":
+			 $id=$_GET['llanId'];
+			 $sonuc=mysqli_query($baglan,"delete from yorum where yorum.YorumId='$id'");
+			echo "Yorum Onaylandı";
+			header("location:adminGiris.php");
+			break;
+			
+			
+			
+		}
+}
+
+
+
+
+}
+?>
 
 
 

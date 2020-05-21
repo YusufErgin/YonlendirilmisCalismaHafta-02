@@ -268,15 +268,12 @@ echo '</tr></table>';
 
 ?>
 
-
-
-
- <?php
+<?php
 session_start();
 $select2=$_SESSION["kullanici"];
 $id=$_GET['llanId'];
 $baglan=mysqli_connect("localhost","root","","yuva");
-$sonuc=mysqli_query($baglan,"select * from yorum where ilanId='$id'"); 
+$sonuc=mysqli_query($baglan,"select * from yorum where ilanId='$id' and Durum='1'"); 
 $satirr=mysqli_num_rows($sonuc);
 mysqli_set_charset($baglan, "utf8");
 //echo "Yorumlar";
@@ -351,6 +348,9 @@ if(isset($_GET["islem11"]))
 
 
 ?>
+
+
+ 
 
 </div> 
 

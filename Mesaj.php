@@ -22,7 +22,7 @@ ob_start();
   padding: 0px;
   top: 50%;
   left: 10%;
-  background: white;
+  background: ;
   text-align: left;
   position: relative;
   left: -400px;
@@ -351,10 +351,9 @@ echo "<option>".$_SESSION["kullanici"]."</option>";
          
          ?>   
          </select>
-                                                            <th> <input type="submit" name="MListeleme" id="MListeleme" value="İstekleri Görüntüle"></th>
+                                                            
                                                             <th> <input type="submit" name="basvurularim" id="basvurularim" value="Başvurularım"></th>
-                                                             <th> <input type="submit" name="sorularim" id="sorularim" value="Gelen Soru"></th>
-                                                             <th> <input type="submit" name="cevaplar" id="cevaplar" value="Gelen Cevaplar"></th>
+                                                         
 						          
 						      
 	
@@ -387,8 +386,8 @@ if($sutun==1){ $sutun=0; echo '</tr><tr>'; }
 	'.$satir['ilanNo'].' 
 <br>Daha Önce Evcil hayvan beslemiş mi :
 	'.$satir['soru'].' <br>
-'."<a href='mesaj.php?islem4=sil&id=".$satir['id']."'>Basvuruyu Reddet</a>".'
-'."<a href='mesaj.php?islem3=sil&id=".$satir['id']."'>Başvuruyu Onayla</a>".'
+'."<a href='mesaj.php?islem4=sil&id=".$satir['id']."'>Basvuruyu Reddet</a>".'----
+'."<a href='mesaj.php?islem3=sil&id=".$satir['id']."'>Başvuruyu Onayla</a>".'----
 '."<a href='soru.php?islem5=sil&id=".$satir['id']."'>Soru Sor</a>".'
 
 <br>
@@ -480,6 +479,7 @@ if($sutun==1){ $sutun=0; echo '</tr><tr>'; }
 	'.$satir['ilanNo'].' <BR>
 Onay Durumu:
 	'.$satir['onay'].' <BR>
+'."<a href='ilanDetay2.php?islem7=sil&llanId=".$satir['ilanNo']."'>Başvuruyu Görüntüle</a>".' ---
 	
 <br>
 <br>
@@ -497,7 +497,7 @@ if(isset($_POST["sorularim"])){ extract($_POST);
 $ad=$_SESSION["kullanici"];
 $baglan=mysqli_connect("localhost","root","","yuva");
 
-$sonuc=mysqli_query($baglan,"select * from soru where  AliciK like '%$ad' and durum='0'"); 
+$sonuc=mysqli_query($baglan,"select * from soru where  AliciK like '%$ad' "); 
 $satirr=mysqli_num_rows($sonuc);
 mysqli_set_charset($baglan, "utf8");
 
@@ -594,8 +594,10 @@ if($sutun==4){ $sutun=0; echo '</tr><tr>'; }
         '.$satir['Turu'].'
 <br>Yaşı:
 	'.$satir['Yas'].'<br>
-'."<a href='mesaj.php?islem2=sil&llanId=".$satir['llanId']."'>İlanı Pasif Yap</a>".'
+'."<a href='mesaj.php?islem2=sil&llanId=".$satir['llanId']."'>İlanı Pasif Yap</a>".' ---
 '."<a href='mesaj.php?islem4=sil&llanId=".$satir['llanId']."'>İlanı Aktif Yap</a>".'<br>
+
+'."<a href='ilanDetay.php?islem6=sil&llanId=".$satir['llanId']."'>İlana Gelen İstekler</a>".' ---
 '."<a href='sahiplendir.php?islem5=sil&llanId=".$satir['llanId']."'>İlanı Sahiplendir</a>".'<br>
 
 	
@@ -665,6 +667,9 @@ if(isset($_GET["islem5"]))
 			
 		}
 }
+
+
+
 
 
 ?>
